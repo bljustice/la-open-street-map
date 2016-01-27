@@ -1,0 +1,5 @@
+Below is the link where I got my Los Angeles OSM data from. This originated from the Map Zen Metro Extracts site located here: https://mapzen.com/data/metro-extracts
+
+https://s3.amazonaws.com/metro-extracts.mapzen.com/los-angeles_california.osm.bz2
+
+I chose this area because I used to live in Los Angeles and was interested in seeing what type of data I could analyze about the area. Los Angeles is in Southern California and is the second most populated city in the United States.
