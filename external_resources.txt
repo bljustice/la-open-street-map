@@ -1,0 +1,7 @@
+Resources used for this project: 
+
+https://docs.python.org/2/library/xml.etree.elementtree.html
+https://docs.mongodb.org/getting-started/python/
+https://docs.mongodb.org/getting-started/python/aggregation/
+https://docs.mongodb.org/manual/reference/operator/aggregation/match/
+https://docs.mongodb.org/manual/reference/method/db.collection.update/
