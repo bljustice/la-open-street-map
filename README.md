@@ -1,5 +1,4 @@
-# Open Street Map Project
-#Data Wrangling with Python and MongoDB
+# Open Street Map Project: Data Wrangling with Python and MongoDB
 
 ##Map Area: Los Angeles, California
 
@@ -61,8 +60,8 @@
   * This section contains high­ level statistics about my dataset named `los_angeles­california.osm`. The sample file for grading is named `sample_final.osm`.
 
   ####File Sizes
-    * los_angeles­california.osm: 1.22 GB
-    * sample_final.osm 12.4 MB
+    * `los_angeles­california.osm: 1.22 GB`
+    * `sample_final.osm 12.4 MB`
 
   ####Number of Documents in `db.project3.osm_v2` MongoDB Collection
     ```Python
@@ -79,17 +78,23 @@
 
   ####Number of Unique Users
     ```Python
-    db.osm_v2.aggregate([{"$group":{"_id":"$created.user","count":{"$sum":1}} },{"$group":{"_id":1,"count":{"$sum":1}}},{"$sort":{"count":­1}}])
+    db.osm_v2.aggregate([{"$group":{"_id":"$created.user","count":{"$sum":1}} },
+    {"$group":{"_id":1,"count":{"$sum":1}}},
+    {"$sort":{"count":­1}}])
     #2,790
     ```
   #### User with Most Contributions
   ```Python
-  db.osm_v2.aggregate([{"$group":{"_id":"$created.user","count":{"$sum":1}} },{"$sort":{"count":­1}},{"$limit":1}])
+  db.osm_v2.aggregate([{"$group":{"_id":"$created.user","count":{"$sum":1}} },
+  {"$sort":{"count":­1}},
+  {"$limit":1}])
   #{'count': 546384, '_id': 'woodpeck_fixbot'}
   ```
   #### Top 3 Cities Included in Data
   ```Python
-  db.osm_v2.aggregate([{'$match':{"address.city":{"$exists":1}}}, {"$group":{"_id":"$address.city","count":{"$sum":1}}},{'$sort':{"count":­ 1}},{"$limit":3}])
+  db.osm_v2.aggregate([{'$match':{"address.city":{"$exists":1}}},
+  {"$group":{"_id":"$address.city","count":{"$sum":1}}},{'$sort':{"count":­ 1}},
+  {"$limit":3}])
   # {'count': 14114, '_id': 'San Diego'}
   # {'count': 12217, '_id': 'Lake Forest'} {'count': 11252, '_id': 'Irvine'}
   ```
@@ -100,7 +105,9 @@
 
   ####Top 5 Amenities
   ```Python
-  db.osm_v2.aggregate([{'$match':{"amenity":{'$exists':1}}}, {'$group':{'_id':'$amenity','count':{'$sum':1}}},{'$sort':{'count':­1}},{ '$limit':5}])
+  db.osm_v2.aggregate([{'$match':{"amenity":{'$exists':1}}},
+  {'$group':{'_id':'$amenity','count':{'$sum':1}}},
+  {'$sort':{'count':­1}},{ '$limit':5}])
   # {'count': 3892, '_id': 'place_of_worship'}
   # {'count': 3806, '_id': 'school'}
   # {'count': 2271, '_id': 'parking'}
@@ -110,7 +117,8 @@
   ####Top 5 Restaurant Cuisines
   ```Python
    db.osm_v2.aggregate([{'$match':{'amenity':'restaurant'}},
-   {'$group':{'_id':'$cuisine','count':{'$sum':1}}}, {'$sort':{'count':­1}},{'$limit':5}])
+   {'$group':{'_id':'$cuisine','count':{'$sum':1}}},
+   {'$sort':{'count':­1}},{'$limit':5}])
   # {'count': 795, '_id': None}
   # {'count': 173, '_id': 'american'}
   # {'count': 152, '_id': 'mexican'}
@@ -119,7 +127,9 @@
   ```
   ####Top 3 Fast­Food Restaurants
   ```Python
-  db.osm_v2.aggregate([{'$match':{'amenity':'fast_food'}}, {'$group':{'_id':'$name','count':{'$sum':1}}}, {'$sort':{'count':­1}},{'$limit':3}])
+  db.osm_v2.aggregate([{'$match':{'amenity':'fast_food'}},
+  {'$group':{'_id':'$name','count':{'$sum':1}}},
+  {'$sort':{'count':­1}},{'$limit':3}])
   # {'count': 117, '_id': 'Subway'}
   # {'count': 113, '_id': "McDonald's"}
   # {'count': 67, '_id': 'Jack in the Box'}
