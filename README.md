@@ -105,7 +105,8 @@
     {"$group":{"_id":"$address.city","count":{"$sum":1}}},{'$sort':{"count":­ 1}},
     {"$limit":3}])
     # {'count': 14114, '_id': 'San Diego'}
-    # {'count': 12217, '_id': 'Lake Forest'} {'count': 11252, '_id': 'Irvine'}
+    # {'count': 12217, '_id': 'Lake Forest'}
+    #{'count': 11252, '_id': 'Irvine'}
     ```
 
 ### Additional Data Exploration and Other Ideas
