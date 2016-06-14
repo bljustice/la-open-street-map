@@ -61,7 +61,8 @@
           fixed_street = re.sub(k,v,str(street)).strip()
           x['address']['street'] = fixed_street
           db.osm_v2.save(x)
-    ```
+      ```
+      
 ### Data Overview
   * This section contains high­ level statistics about my dataset named `los_angeles­california.osm`. The sample file for grading is named `sample_final.osm`.
 
