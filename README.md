@@ -18,7 +18,10 @@
   * After inserting the data into MongoDB, I found that there were 296 different cities listed in my collection. I wasn’t expecting this since my OSM data was only supposed to be for Los Angeles, but initially thought that it may be broken down by neighborhood. Below is the pipeline to find the number of unique cities in my dataset.
 
   ```Python
-  db.osm_v2.aggregate([{"$match":{"address.city":{"$exists":1}}}, {"$group":{"_id":"$address.city","count":{"$sum":1}}},{"$group":{"_id":1, "count":{"$sum":1}}},{"$sort":{"count":1}}])
+  db.osm_v2.aggregate([{"$match":{"address.city":{"$exists":1}}},
+  {"$group":{"_id":"$address.city","count":{"$sum":1}}},
+  {"$group":{"_id":1, "count":{"$sum":1}}},
+  {"$sort":{"count":1}}])
   ```
   * Three of the cities values I found were Los Angeles, San Diego, and Beverly Hills. San Diego is a completely different city, so this was unexpected. Beverly Hills is a neighborhood in Los Angeles so that made more sense to include in this dataset. To
    back up my thought about specific neighborhoods being labeled as cities, I checked the following San Diego address to see if the neighborhood was in fact San Diego. Turns out it was not. The address is actually in Palomar Mountain, which leads me to believe that the other city fields outside of the document below may be incorrect as well.
@@ -57,47 +60,51 @@
       db.osm_v2.save(x)
   ```
 ###Data Overview
-  * This section contains high­ level statistics about my dataset named `los_angeles­california.osm`. The sample file for grading is named `sample_final.osm`.
+  * This section contains high­ level statistics about my dataset named `los_angeles­california.osm.`` The sample file for grading is named `sample_final.osm`.
 
-  ####File Sizes
-    * `los_angeles­california.osm: 1.22 GB`
-    * `sample_final.osm 12.4 MB`
+    ####File Sizes
+      * `los_angeles­california.osm`: 1.22 GB
+      * `sample_final.osm`: 12.4 MB
 
-  ####Number of Documents in `db.project3.osm_v2` MongoDB Collection
-    ```Python
-    db.osm_v2.count()
-    #5,533,000
-    ```
-  ####Number of Tag Types
-    ```Python
-    db.osm_v2.find({"type":"node"}).count()
-    #5,268,722
-    db.osm_v2.find({"type":"way"}).count()
-    #263,722
-    ```
+    ####Number of Documents in `db.project3.osm_v2` MongoDB Collection
+      ```Python
+      db.osm_v2.count()
+      #5,533,000
+      ```
 
-  ####Number of Unique Users
+    ####Number of Tag Types
+      ```Python
+      db.osm_v2.find({"type":"node"}).count()
+      #5,268,722
+      db.osm_v2.find({"type":"way"}).count()
+      #263,722
+      ```
+
+    ####Number of Unique Users
+      ```Python
+      db.osm_v2.aggregate([{"$group":{"_id":"$created.user","count":{"$sum":1}} },
+      {"$group":{"_id":1,"count":{"$sum":1}}},
+      {"$sort":{"count":­1}}])
+      #2,790
+      ```
+
+    #### User with Most Contributions
     ```Python
     db.osm_v2.aggregate([{"$group":{"_id":"$created.user","count":{"$sum":1}} },
-    {"$group":{"_id":1,"count":{"$sum":1}}},
-    {"$sort":{"count":­1}}])
-    #2,790
+    {"$sort":{"count":­1}},
+    {"$limit":1}])
+    #{'count': 546384, '_id': 'woodpeck_fixbot'}
     ```
-  #### User with Most Contributions
-  ```Python
-  db.osm_v2.aggregate([{"$group":{"_id":"$created.user","count":{"$sum":1}} },
-  {"$sort":{"count":­1}},
-  {"$limit":1}])
-  #{'count': 546384, '_id': 'woodpeck_fixbot'}
-  ```
-  #### Top 3 Cities Included in Data
-  ```Python
-  db.osm_v2.aggregate([{'$match':{"address.city":{"$exists":1}}},
-  {"$group":{"_id":"$address.city","count":{"$sum":1}}},{'$sort':{"count":­ 1}},
-  {"$limit":3}])
-  # {'count': 14114, '_id': 'San Diego'}
-  # {'count': 12217, '_id': 'Lake Forest'} {'count': 11252, '_id': 'Irvine'}
-  ```
+
+    #### Top 3 Cities Included in Data
+    ```Python
+    db.osm_v2.aggregate([{'$match':{"address.city":{"$exists":1}}},
+    {"$group":{"_id":"$address.city","count":{"$sum":1}}},{'$sort':{"count":­ 1}},
+    {"$limit":3}])
+    # {'count': 14114, '_id': 'San Diego'}
+    # {'count': 12217, '_id': 'Lake Forest'} {'count': 11252, '_id': 'Irvine'}
+    ```
+
 ###Additional Data Exploration and Other Ideas
   * After analyzing the entries with amenities data, I found some interesting insights into the area’s restaurant scene. For example, initially I expected McDonalds to be the most common fast food chain in the area due to it’s popularity, but it turns out that Subway is more common. This may only be because the dataset is incomplete.
 
