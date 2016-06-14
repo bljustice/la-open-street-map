@@ -78,7 +78,7 @@
     #### Number of Tag Types
       ```Python
       db.osm_v2.find({"type":"node"}).count()
-      #5,268,722
+      # 5,268,722
       db.osm_v2.find({"type":"way"}).count()
       #263,722
       ```
@@ -96,7 +96,7 @@
     db.osm_v2.aggregate([{"$group":{"_id":"$created.user","count":{"$sum":1}} },
     {"$sort":{"count":­1}},
     {"$limit":1}])
-    #{'count': 546384, '_id': 'woodpeck_fixbot'}
+    #{ 'count': 546384, '_id': 'woodpeck_fixbot'}
     ```
 
     #### Top 3 Cities Included in Data
@@ -106,7 +106,7 @@
     {"$limit":3}])
     # {'count': 14114, '_id': 'San Diego'}
     # {'count': 12217, '_id': 'Lake Forest'}
-    #{'count': 11252, '_id': 'Irvine'}
+    # {'count': 11252, '_id': 'Irvine'}
     ```
 
 ### Additional Data Exploration and Other Ideas
