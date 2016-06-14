@@ -2,7 +2,7 @@
 
 ## Map Area: Los Angeles, California
 
-### Initial Issues with dataset
+### Initial Issues with the  Dataset
   * There were several issues with the dataset that needed to be addressed before it could be analyzed. I've outlined several of the major ones below.
 
   #### Inconsistent Zip Codes
@@ -16,7 +16,7 @@
     for x in long_zip:
       x['address']['postcode'] = re.sub('­.*','',str(x['address']['postcode']))
       db.osm_v2.save(x)
-  ```
+    ```
   #### Inconsistent Cities
     * After inserting the data into MongoDB, I found that there were 296 different cities listed in my collection. I wasn’t expecting this since my OSM data was only supposed to be for Los Angeles, but initially thought that it may be broken down by neighborhood. Below is the pipeline to find the number of unique cities in my dataset.
 
@@ -63,7 +63,7 @@
         db.osm_v2.save(x)
   ```
 ### Data Overview
-  * This section contains high­ level statistics about my dataset named `los_angeles­california.osm.`` The sample file for grading is named `sample_final.osm`.
+  * This section contains high­ level statistics about my dataset named `los_angeles­california.osm`. The sample file for grading is named `sample_final.osm`.
 
     #### File Sizes
       * `los_angeles­california.osm`: 1.22 GB
