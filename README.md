@@ -96,7 +96,7 @@
     db.osm_v2.aggregate([{"$group":{"_id":"$created.user","count":{"$sum":1}} },
     {"$sort":{"count":­1}},
     {"$limit":1}])
-    #{ 'count': 546384, '_id': 'woodpeck_fixbot'}
+    # {'count': 546384, '_id': 'woodpeck_fixbot'}
     ```
 
     #### Top 3 Cities Included in Data
